@@ -9,64 +9,71 @@
 using namespace std;
 using namespace oxygine;
 
-namespace facebook {
+namespace facebook
+{
 
-	void init();
-	void free();
+    void init();
+    void free();
 
-		class NewMeRequestEvent : public Event {
-		public:
-			enum { EVENT = sysEventID('f', 'b', 'n') };
-			NewMeRequestEvent() : Event(EVENT) {}
-			
-			string id;
-			string link;
-			string name;
-			bool error = false;
-		};
-	
-		class LoginEvent : public Event {
-		public:
-			enum { EVENT = sysEventID('f','b','l')};
-			LoginEvent() : Event(EVENT) {}
-			bool isLoggedIn = false;
-		};
+    class NewMeRequestEvent : public Event
+    {
+    public:
+        enum { EVENT = sysEventID('f', 'b', 'n') };
+        NewMeRequestEvent() : Event(EVENT) {}
 
-		class FriendsEvent : public Event {
-			enum { EVENT = sysEventID('f', 'b', 'f')};
-			FriendsEvent() : Event(EVENT) {}
+        string id;
+        string link;
+        string name;
+        bool error = false;
+    };
 
-			struct friend_Data {
-				string name;
-			};
+    class LoginEvent : public Event
+    {
+    public:
+        enum { EVENT = sysEventID('f', 'b', 'l')};
+        LoginEvent() : Event(EVENT) {}
+        bool isLoggedIn = false;
+    };
 
-			typedef list<friend_Data> friends_list;
+    class FriendsEvent : public Event
+    {
+        enum { EVENT = sysEventID('f', 'b', 'f')};
+        FriendsEvent() : Event(EVENT) {}
 
-			friends_list friends;
-			bool error = false;
+        struct friend_Data
+        {
+            string name;
+        };
 
-		};
+        typedef list<friend_Data> friends_list;
 
-		class TokenEvent : public Event {
-		public:
-			enum { EVENT = sysEventID('f', 'b', 't')};
-			TokenEvent() : Event(EVENT) {};
+        friends_list friends;
+        bool error = false;
 
-			string token;
-		};
+    };
 
-		spEventDispatcher dispatcher();
+    class TokenEvent : public Event
+    {
+    public:
+        enum { EVENT = sysEventID('f', 'b', 't')};
+        TokenEvent() : Event(EVENT) {};
 
-		bool isLoggedIn();
-		void login();
-		void getFriends();
-		void newMeRequest();
-		bool appInviteDialog(const string& appLinkUrl, const string& previewImageUrl);
+        string token;
+    };
 
-		namespace internal {
-			void newMeRequestResult(const string& data, bool error);
-			void loginResult(bool value);
-			void newToken(const string& value);
-			void newMyFriendsRequestResult(const string& data, bool error);
-		}
+    spEventDispatcher dispatcher();
+
+    bool isLoggedIn();
+    void login();
+    void getFriends();
+    void newMeRequest();
+    bool appInviteDialog(const string& appLinkUrl, const string& previewImageUrl);
+
+    namespace internal
+    {
+        void newMeRequestResult(const string& data, bool error);
+        void loginResult(bool value);
+        void newToken(const string& value);
+        void newMyFriendsRequestResult(const string& data, bool error);
+    }
 };

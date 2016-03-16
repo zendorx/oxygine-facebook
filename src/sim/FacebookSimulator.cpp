@@ -1,5 +1,5 @@
 #include "FacebookSimulator.h"
-#include "FacebookAdapter.h"
+#include "facebook.h"
 
 
 bool _is_logged_in = false;
@@ -7,35 +7,35 @@ string facebook_token = "CAANycbhXMg0BAMpzvMM7M8sTjnRghS5heVq3EatYJssa9TKSnZArS7
 
 void facebookSimulatorLogin()
 {
-	_is_logged_in = true;
-	facebook::internal::loginResult(true);
-	facebook::internal::newToken(facebook_token);
+    _is_logged_in = true;
+    facebook::internal::loginResult(true);
+    facebook::internal::newToken(facebook_token);
 }
 
 void facebookSimulatorInit()
 {
-	log::messageln("Facebook Simulator Init");
+    log::messageln("Facebook Simulator Init");
 
 }
 
 void facebookSimulatorNewMeRequest()
 {
-	string data = "{\"id\":\"1035749669829946\",\"link\" : \"https:\/\/www.facebook.com\/app_scoped_user_id\/1035749669829946\/\",\"name\" : \"Denis Sachkov\"}";
-	facebook::internal::newMeRequestResult(data, false);
+    string data = "{\"id\":\"1035749669829946\",\"link\" : \"https:\/\/www.facebook.com\/app_scoped_user_id\/1035749669829946\/\",\"name\" : \"Denis Sachkov\"}";
+    facebook::internal::newMeRequestResult(data, false);
 }
 
 
 void facebookSimulatorGetFriends()
 {
-	
+
 }
 
 bool facebookSimulatorAppInviteDialog(const string& appLinkUrl, const string& previewImageUrl)
 {
-	return false;
+    return false;
 }
 
 bool facebookSimulatorIsLoggedIn()
 {
-	return _is_logged_in;
+    return _is_logged_in;
 }

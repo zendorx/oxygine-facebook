@@ -15,35 +15,39 @@ using namespace oxygine;
 jclass _jFacebookClass = 0;
 jobject _jFacebookObject = 0;
 
-bool isFacebookEnabled() {
+bool isFacebookEnabled()
+{
     return _jFacebookClass && _jFacebookObject;
 }
 
 
 extern "C"
 {
-    JNIEXPORT void JNICALL Java_com_furry_FacebookAdapter_FacebookAdapter_newMeRequestResult(JNIEnv *env, jobject obj, jstring json_data, jboolean error)
+    JNIEXPORT void JNICALL Java_com_furry_FacebookAdapter_FacebookAdapter_newMeRequestResult(JNIEnv* env, jobject obj, jstring json_data, jboolean error)
     {
         string data = jniGetString(env, json_data);
 
-        core::getMainThreadMessages().postCallback([ = ]() {
-            facebook::internal::newMeRequestResult( data , (bool) error) ;
+        core::getMainThreadMessages().postCallback([ = ]()
+        {
+            facebook::internal::newMeRequestResult(data , (bool) error) ;
         });
     }
 
-    JNIEXPORT void JNICALL Java_com_furry_FacebookAdapter_FacebookAdapter_newToken(JNIEnv *env, jobject obj, jstring json_data)
+    JNIEXPORT void JNICALL Java_com_furry_FacebookAdapter_FacebookAdapter_newToken(JNIEnv* env, jobject obj, jstring json_data)
     {
         string data = jniGetString(env, json_data);
 
-        core::getMainThreadMessages().postCallback([ = ]() {
-            facebook::internal::newToken( data ) ;
+        core::getMainThreadMessages().postCallback([ = ]()
+        {
+            facebook::internal::newToken(data) ;
         });
     }
 
     JNIEXPORT void JNICALL Java_com_furry_FacebookAdapter_FacebookAdapter_loginResult(JNIEnv* env, jobject obj, jboolean value)
     {
-        core::getMainThreadMessages().postCallback([ = ]() {
-            facebook::internal::loginResult((bool ) value ) ;
+        core::getMainThreadMessages().postCallback([ = ]()
+        {
+            facebook::internal::loginResult((bool) value) ;
         });
     }
 
@@ -51,7 +55,8 @@ extern "C"
     {
         string data = jniGetString(env, json_data);
 
-        core::getMainThreadMessages().postCallback([ = ]() {
+        core::getMainThreadMessages().postCallback([ = ]()
+        {
             facebook::internal::newMyFriendsRequestResult(data, (bool) error);
         });
     }
@@ -111,7 +116,7 @@ bool jniFacebookIsLoggedIn()
     bool result = false;
     try
     {
-        JNIEnv *env = jniGetEnv();
+        JNIEnv* env = jniGetEnv();
         LOCAL_REF_HOLDER(env);
 
         jmethodID jisLoggedIn = env->GetMethodID(_jFacebookClass, "isLoggedIn", "()Z");
@@ -121,7 +126,7 @@ bool jniFacebookIsLoggedIn()
         result = (bool) jb;
 
     }
-    catch(const notFound&)
+    catch (const notFound&)
     {
         log::error("jniFacebookIsLoggedIn failed, class/member not found");
     }
@@ -136,7 +141,7 @@ void jniFacebookNewMeRequest()
 
     try
     {
-        JNIEnv *env = jniGetEnv();
+        JNIEnv* env = jniGetEnv();
         LOCAL_REF_HOLDER(env);
 
         jmethodID jnewMeRequest = env->GetMethodID(_jFacebookClass, "newMeRequest", "()V");
@@ -144,7 +149,7 @@ void jniFacebookNewMeRequest()
         env->CallVoidMethod(_jFacebookObject, jnewMeRequest);
 
     }
-    catch(const notFound&)
+    catch (const notFound&)
     {
         log::error("jniFacebookNewMeRequest failed, class/member not found");
     }
@@ -157,7 +162,7 @@ bool jniFacebookAppInviteDialog(const string& appLinkUrl, const string& previewI
 
     try
     {
-        JNIEnv *env = jniGetEnv();
+        JNIEnv* env = jniGetEnv();
         LOCAL_REF_HOLDER(env);
 
         jmethodID jappInviteDialog = env->GetMethodID(_jFacebookClass, "appInviteDialog", "([Ljava/lang/String;[Ljava/lang/String;)Z");
@@ -169,7 +174,7 @@ bool jniFacebookAppInviteDialog(const string& appLinkUrl, const string& previewI
         env->CallVoidMethod(_jFacebookObject, jappInviteDialog, jappLinkUrl, jpreviewImageUrl);
 
     }
-    catch(const notFound&)
+    catch (const notFound&)
     {
         log::error("jniFacebookGetFriends failed, class/member not found");
     }
@@ -182,7 +187,7 @@ void jniFacebookGetFriends()
 
     try
     {
-        JNIEnv *env = jniGetEnv();
+        JNIEnv* env = jniGetEnv();
         LOCAL_REF_HOLDER(env);
 
         jmethodID jgetFriends = env->GetMethodID(_jFacebookClass, "newMyFriendsRequest", "()V");
@@ -190,7 +195,7 @@ void jniFacebookGetFriends()
         env->CallVoidMethod(_jFacebookObject, jgetFriends);
 
     }
-    catch(const notFound&)
+    catch (const notFound&)
     {
         log::error("jniFacebookGetFriends failed, class/member not found");
     }
@@ -203,7 +208,7 @@ void jniFacebookLogin()
 
     try
     {
-        JNIEnv *env = jniGetEnv();
+        JNIEnv* env = jniGetEnv();
         LOCAL_REF_HOLDER(env);
 
         jmethodID jlogin = env->GetMethodID(_jFacebookClass, "login", "()V");
@@ -211,7 +216,7 @@ void jniFacebookLogin()
         env->CallVoidMethod(_jFacebookObject, jlogin);
 
     }
-    catch(const notFound&)
+    catch (const notFound&)
     {
         log::error("jniFacebookLogin failed, class/member not found");
     }

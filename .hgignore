@@ -1,0 +1,2 @@
+syntax: glob
+example/HelloWorldFacebook/proj.cmake/build/
