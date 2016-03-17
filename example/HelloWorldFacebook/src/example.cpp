@@ -11,11 +11,6 @@ using namespace oxygine;
 //It is important on mobile devices with limited memory and you would load/unload them
 Resources resources;
 
-//#define MULTIWINDOW 1
-
-#if MULTIWINDOW
-spStage stage2;
-#endif
 
 class TestActor : public Test
 {
@@ -29,12 +24,14 @@ public:
 
 
         addButton("login", "login");
+        addButton("token", "token = " + facebook::getAccessToken());
     }
-
+    
     void clicked(string id)
     {
         if (id == "login")
         {
+            facebook::login();
         }
     }
 };

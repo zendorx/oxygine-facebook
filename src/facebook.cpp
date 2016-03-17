@@ -2,9 +2,15 @@
 
 #ifdef __ANDROID__
 #include "android/AndroidFacebook.h"
+
+#elif __APPLE__
+#include <TargetConditionals.h>
+#include "ios/iosFacebook.h"
 #else
 #include "sim/FacebookSimulator.h"
 #endif
+
+
 
 #define FB_EXT_ENABLED 1
 
@@ -29,6 +35,8 @@ namespace facebook
 
 #ifdef __ANDROID__
         jniFacebookInit();
+#elif TARGET_OS_IPHONE
+
 #else
         facebookSimulatorInit();
 #endif
@@ -59,6 +67,8 @@ namespace facebook
 
 #ifdef __ANDROID__
         jniFacebookLogin();
+#elif __APPLE__
+        iosFacebookLogin();
 #else
         facebookSimulatorLogin();
 #endif
@@ -74,6 +84,7 @@ namespace facebook
 
 #ifdef __ANDROID__
         return jniFacebookAppInviteDialog(appLinkUrl, previewImageUrl);
+#elif TARGET_OS_IPHONE
 #else
         return facebookSimulatorAppInviteDialog(appLinkUrl, previewImageUrl);
 #endif
@@ -91,6 +102,7 @@ namespace facebook
 
 #ifdef __ANDROID__
         jniFacebookNewMeRequest();
+#elif TARGET_OS_IPHONE
 #else
         facebookSimulatorNewMeRequest();
 #endif
@@ -106,6 +118,7 @@ namespace facebook
 
 #ifdef __ANDROID__
         jniFacebookGetFriends();
+#elif TARGET_OS_IPHONE
 #else
         facebookSimulatorGetFriends();
 #endif
@@ -121,10 +134,28 @@ namespace facebook
 
 #ifdef __ANDROID__
         return jniFacebookIsLoggedIn();
+#elif TARGET_OS_IPHONE
 #else
         return facebookSimulatorIsLoggedIn();
 #endif
         return false;
+    }
+    
+    string getAccessToken()
+    {
+#if !FB_EXT_ENABLED
+        return "";
+#endif
+        log::messageln("facebook::isLoggined");
+        
+#ifdef __ANDROID__
+        return jniFacebookGetAccessToken();
+#elif TARGET_OS_IPHONE
+        return iosFacebookGetAccessToken();
+#else
+        return facebookSimulatorGetAccessToken();
+#endif
+        return "";
     }
 
     namespace internal
@@ -165,7 +196,7 @@ namespace facebook
             if (!parsingSuccessful || error)
             {
                 event.error = true;
-                log::messageln("newMeRequestResult error" + error ? "response error" : "parse error");
+                log::messageln("newMeRequestResult error %s", error ? "response error" : "parse error");
                 return;
             }
             else
