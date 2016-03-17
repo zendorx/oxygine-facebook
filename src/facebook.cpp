@@ -140,20 +140,38 @@ namespace facebook
 #endif
         return false;
     }
-    
+
     string getAccessToken()
     {
 #if !FB_EXT_ENABLED
         return "";
 #endif
         log::messageln("facebook::isLoggined");
-        
+
 #ifdef __ANDROID__
         return jniFacebookGetAccessToken();
 #elif TARGET_OS_IPHONE
         return iosFacebookGetAccessToken();
 #else
         return facebookSimulatorGetAccessToken();
+#endif
+        return "";
+    }
+
+    string getUserID()
+    {
+
+#if !FB_EXT_ENABLED
+        return "";
+#endif
+        log::messageln("facebook::getUserID");
+
+#ifdef __ANDROID__
+        return jniFacebookGetUserID();
+#elif TARGET_OS_IPHONE
+        return iosFacebookGetUserID();
+#else
+        return facebookSimulatorGetUserID();
 #endif
         return "";
     }

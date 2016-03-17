@@ -1,11 +1,3 @@
-//
-//  Match3QuestDelegate.m
-//  Match3Quest
-//
-//  Created by Denis on 16/01/15.
-//  Copyright (c) 2015 Mac. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 

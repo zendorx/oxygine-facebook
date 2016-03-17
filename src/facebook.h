@@ -68,8 +68,9 @@ namespace facebook
     void getFriends();
     void newMeRequest();
     bool appInviteDialog(const string& appLinkUrl, const string& previewImageUrl);
-    
+
     string getAccessToken();
+    string getUserID();
 
     namespace internal
     {

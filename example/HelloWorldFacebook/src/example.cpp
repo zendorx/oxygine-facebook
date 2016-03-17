@@ -26,7 +26,7 @@ public:
         addButton("login", "login");
         addButton("token", "token = " + facebook::getAccessToken());
     }
-    
+
     void clicked(string id)
     {
         if (id == "login")
