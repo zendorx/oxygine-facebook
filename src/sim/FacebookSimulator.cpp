@@ -9,8 +9,8 @@
 #include "Stage.h"
 #include "core/oxygine.h"
 
-bool _isLoggedIn = false;
-string _facebookToken = "CAACk349LXq8BAEQqlvXMISPzBcsnE6uC5IDzrOJ9g5iDj7JAfqFO36ZC231gpigo1RFaZAZApPzUcPMu1ovCgZAUUAN0Tz0fk6ZBOxjtzzjOvYsJ4udSkXp3X7QSdaLCcawwvUr16pKB6IYpUMJkU9EWkWNL3YSDky5SCmUGXo5YH2cQxZCPqxFnqnqc7aZBwvr71D7IcY2vwZDZD";
+bool _isLoggedIn = true;
+string _facebookToken = "CAACk349LXq8BANvZBq51HngUpBcL8OSkHvDxZAlqZCZAJZB7IfaL86kgRWDGZBU2owFX5Q5W7BaF1Uk2R9OdC3xrNVLwNGlnEMpSo9bAKhZCwiIyrriT3V4pNwCvjndbjhq13jhnPm8Ry22dHxZAp165cUSZA3wXoeHG9aZAnxSkGszIiORCvrMkOoApujzmtU6QqNZC6ZAxPGHTcAZDZD";
 string _userID = "10209410932054945";
 
 

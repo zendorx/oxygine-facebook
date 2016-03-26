@@ -31,6 +31,7 @@ namespace facebook
 #endif
 
         log::messageln("facebook::init");
+        OX_ASSERT(_dispatcher == 0);
         _dispatcher = new EventDispatcher;
 
 #ifdef __ANDROID__
@@ -51,9 +52,12 @@ namespace facebook
 
         log::messageln("facebook::free");
 
+        OX_ASSERT(_dispatcher);
+
 #ifdef __ANDROID__
         jniFacebookFree();
 #endif
+        _dispatcher->removeAllEventListeners();
         _dispatcher = 0;
         log::messageln("facebook::free done");
     }
