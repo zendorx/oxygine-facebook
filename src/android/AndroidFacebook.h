@@ -12,3 +12,6 @@ void jniFacebookGetFriends();
 void jniFacebookLogin();
 void jniFacebookNewMeRequest();
 bool jniFacebookAppInviteDialog(const string& appLinkUrl, const string& previewImageUrl);
+
+string jniFacebookGetAccessToken();
+string jniFacebookGetUserID();

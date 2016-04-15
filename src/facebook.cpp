@@ -150,7 +150,7 @@ namespace facebook
 #if !FB_EXT_ENABLED
         return "";
 #endif
-        log::messageln("facebook::isLoggined");
+        log::messageln("facebook::getAccessToken");
 
 #ifdef __ANDROID__
         return jniFacebookGetAccessToken();
