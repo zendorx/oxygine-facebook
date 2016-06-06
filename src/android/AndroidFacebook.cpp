@@ -28,7 +28,7 @@ extern "C"
     {
         string data = jniGetString(env, json_data);
 
-        core::getMainThreadMessages().postCallback([ = ]()
+        core::getMainThreadDispatcher().postCallback([ = ]()
         {
             facebook::internal::newMeRequestResult(data , (bool) error) ;
         });
@@ -38,7 +38,7 @@ extern "C"
     {
         string data = jniGetString(env, json_data);
 
-        core::getMainThreadMessages().postCallback([ = ]()
+        core::getMainThreadDispatcher().postCallback([ = ]()
         {
             facebook::internal::newToken(data) ;
         });
@@ -46,7 +46,7 @@ extern "C"
 
     JNIEXPORT void JNICALL Java_org_oxygine_facebook_FacebookAdapter_loginResult(JNIEnv* env, jobject obj, jboolean value)
     {
-        core::getMainThreadMessages().postCallback([ = ]()
+        core::getMainThreadDispatcher().postCallback([ = ]()
         {
             facebook::internal::loginResult((bool) value) ;
         });
@@ -56,7 +56,7 @@ extern "C"
     {
         string data = jniGetString(env, json_data);
 
-        core::getMainThreadMessages().postCallback([ = ]()
+        core::getMainThreadDispatcher().postCallback([ = ]()
         {
             facebook::internal::newMyFriendsRequestResult(data, (bool) error);
         });
