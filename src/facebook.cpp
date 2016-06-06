@@ -26,13 +26,14 @@ namespace facebook
 
     void init()
     {
-#if !FB_EXT_ENABLED
-        return;
-#endif
-
         log::messageln("facebook::init");
         OX_ASSERT(_dispatcher == 0);
         _dispatcher = new EventDispatcher;
+
+
+#if !FB_EXT_ENABLED
+        return;
+#endif
 
 #ifdef __ANDROID__
         jniFacebookInit();

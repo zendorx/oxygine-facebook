@@ -169,15 +169,10 @@ public class FacebookAdapter extends ActivityObserver
 
     public String getUserID()
     {
-        if (userData == null)
+        if (accessToken == null)
             return "";
-
-        try {
-            return userData.getString("id");
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return "";
-        }
+        
+        return accessToken.getUserId();
     }
 
     public String getAccessToken()
