@@ -14,7 +14,6 @@ string _facebookToken = "CAACk349LXq8BANvZBq51HngUpBcL8OSkHvDxZAlqZCZAJZB7IfaL86
 string _userID = "10209410932054945";
 
 
-
 DECLARE_SMART(Btn, spBtn);
 class Btn : public Box9Sprite
 {
@@ -170,6 +169,26 @@ void facebookSimulatorInit()
         Json::Reader reader;
         reader.parse((char*)&bf.front(), (char*)&bf.front() + bf.size(), _facebook, false);
     }
+
+#ifdef EMSCRIPTEN
+    char token[255];
+    char id[255];
+
+    EM_ASM_INT(
+    {
+        var id = getURLParameter("id") || "";
+        stringToUTF8(id, $0, 255);
+
+        var token = getURLParameter("token") || "";
+        stringToUTF8(token, $1, 255);
+
+    }, id, token);
+
+    if (id[0])
+        _userID = id;
+    if (token[0])
+        _facebookToken = token;
+#endif
 }
 
 void facebookSimulatorNewMeRequest()
