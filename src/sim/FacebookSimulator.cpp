@@ -9,10 +9,9 @@
 #include "Stage.h"
 #include "core/oxygine.h"
 
-bool _isLoggedIn = false;
-string _facebookToken = "CAACk349LXq8BAEQqlvXMISPzBcsnE6uC5IDzrOJ9g5iDj7JAfqFO36ZC231gpigo1RFaZAZApPzUcPMu1ovCgZAUUAN0Tz0fk6ZBOxjtzzjOvYsJ4udSkXp3X7QSdaLCcawwvUr16pKB6IYpUMJkU9EWkWNL3YSDky5SCmUGXo5YH2cQxZCPqxFnqnqc7aZBwvr71D7IcY2vwZDZD";
+bool _isLoggedIn = true;
+string _facebookToken = "CAACk349LXq8BANvZBq51HngUpBcL8OSkHvDxZAlqZCZAJZB7IfaL86kgRWDGZBU2owFX5Q5W7BaF1Uk2R9OdC3xrNVLwNGlnEMpSo9bAKhZCwiIyrriT3V4pNwCvjndbjhq13jhnPm8Ry22dHxZAp165cUSZA3wXoeHG9aZAnxSkGszIiORCvrMkOoApujzmtU6QqNZC6ZAxPGHTcAZDZD";
 string _userID = "10209410932054945";
-
 
 
 DECLARE_SMART(Btn, spBtn);
@@ -170,6 +169,26 @@ void facebookSimulatorInit()
         Json::Reader reader;
         reader.parse((char*)&bf.front(), (char*)&bf.front() + bf.size(), _facebook, false);
     }
+
+#ifdef EMSCRIPTEN
+    char token[255];
+    char id[255];
+
+    EM_ASM_INT(
+    {
+        var id = getURLParameter("id") || "";
+        stringToUTF8(id, $0, 255);
+
+        var token = getURLParameter("token") || "";
+        stringToUTF8(token, $1, 255);
+
+    }, id, token);
+
+    if (id[0])
+        _userID = id;
+    if (token[0])
+        _facebookToken = token;
+#endif
 }
 
 void facebookSimulatorNewMeRequest()

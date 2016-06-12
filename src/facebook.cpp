@@ -26,12 +26,14 @@ namespace facebook
 
     void init()
     {
+        log::messageln("facebook::init");
+        OX_ASSERT(_dispatcher == 0);
+        _dispatcher = new EventDispatcher;
+
+
 #if !FB_EXT_ENABLED
         return;
 #endif
-
-        log::messageln("facebook::init");
-        _dispatcher = new EventDispatcher;
 
 #ifdef __ANDROID__
         jniFacebookInit();
@@ -51,9 +53,12 @@ namespace facebook
 
         log::messageln("facebook::free");
 
+        OX_ASSERT(_dispatcher);
+
 #ifdef __ANDROID__
         jniFacebookFree();
 #endif
+        _dispatcher->removeAllEventListeners();
         _dispatcher = 0;
         log::messageln("facebook::free done");
     }
@@ -146,7 +151,7 @@ namespace facebook
 #if !FB_EXT_ENABLED
         return "";
 #endif
-        log::messageln("facebook::isLoggined");
+        log::messageln("facebook::getAccessToken");
 
 #ifdef __ANDROID__
         return jniFacebookGetAccessToken();

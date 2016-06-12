@@ -1,3 +1,5 @@
 libs/ios
 example/HelloWorldFacebook/proj.ios/HelloWorldFacebook_ios.xcodeproj/xcuserdata
 example/HelloWorldFacebook/proj.ios/HelloWorldFacebook_ios.xcodeproj/project.xcworkspace/xcuserdata
+android/build/
+android/oxygine-facebook.iml
