@@ -12,5 +12,5 @@
 
 void iosFacebookLogin();
 std::string iosFacebookGetAccessToken();
-
+std::string iosFacebookGetUserID();
 #endif /* Header_h */

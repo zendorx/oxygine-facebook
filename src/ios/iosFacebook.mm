@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#include "facebook.h"
 
 void iosFacebookLogin()
 {
@@ -17,6 +18,7 @@ void iosFacebookLogin()
      logInWithReadPermissions: @[@"public_profile"]
      fromViewController:0
      handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+         facebook::internal::loginResult(error == 0);
          if (error) {
              NSLog(@"Process error");
          } else if (result.isCancelled) {
@@ -29,5 +31,14 @@ void iosFacebookLogin()
 
 std::string iosFacebookGetAccessToken()
 {
-    return [[FBSDKAccessToken currentAccessToken ].tokenString UTF8String];
+    if ([FBSDKAccessToken currentAccessToken])
+        return [[FBSDKAccessToken currentAccessToken ].tokenString UTF8String];
+    return "";
+}
+
+std::string iosFacebookGetUserID()
+{
+    if ([FBSDKAccessToken currentAccessToken])
+        return [[FBSDKAccessToken currentAccessToken].userID UTF8String];
+    return "";
 }
