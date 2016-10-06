@@ -199,8 +199,10 @@ public class FacebookAdapter extends ActivityObserver
 
     @Override
     public void onDestroy() {
-        accessTokenTracker.stopTracking();
-        profileTracker.stopTracking();
+        if (accessTokenTracker != null)
+            accessTokenTracker.stopTracking();
+        if (profileTracker != null)
+            profileTracker.stopTracking();
     }
 
     @Override
