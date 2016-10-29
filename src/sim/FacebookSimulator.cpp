@@ -193,7 +193,7 @@ void facebookSimulatorInit()
 
 void facebookSimulatorNewMeRequest()
 {
-    string data = "{\"id\":\"1035749669829946\",\"link\" : \"https:\/\/www.facebook.com\/app_scoped_user_id\/1035749669829946\/\",\"name\" : \"Denis Sachkov\"}";
+    string data = "{\"id\":\"YOUR_FACEBOOK_ID\",\"link\" : \"https://www.facebook.com/app_scoped_user_id/YOUR_FACEBOOK_ID/\",\"name\" : \"YOUR NAME\"}";
     facebook::internal::newMeRequestResult(data, false);
 }
 
