@@ -42,3 +42,8 @@ std::string iosFacebookGetUserID()
         return [[FBSDKAccessToken currentAccessToken].userID UTF8String];
     return "";
 }
+
+std::string iosFacebookGetAppID()
+{
+    return [[FBSDKSettings appID] UTF8String];
+}
