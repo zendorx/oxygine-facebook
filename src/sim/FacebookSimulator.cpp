@@ -10,9 +10,9 @@
 #include "core/oxygine.h"
 
 bool _isLoggedIn = true;
-string _facebookToken = "CAACk349LXq8BANvZBq51HngUpBcL8OSkHvDxZAlqZCZAJZB7IfaL86kgRWDGZBU2owFX5Q5W7BaF1Uk2R9OdC3xrNVLwNGlnEMpSo9bAKhZCwiIyrriT3V4pNwCvjndbjhq13jhnPm8Ry22dHxZAp165cUSZA3wXoeHG9aZAnxSkGszIiORCvrMkOoApujzmtU6QqNZC6ZAxPGHTcAZDZD";
-string _userID = "10209410932054945";
-string _appID = "123";
+string _facebookToken = "YOUR_FACEBOOK_TOKEN";
+string _userID = "YOUR_FACEBOOK_ID";
+string _appID = "YOU_FACEBOOK_APP_ID";
 
 DECLARE_SMART(Btn, spBtn);
 class Btn : public Box9Sprite

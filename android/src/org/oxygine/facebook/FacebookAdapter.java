@@ -175,6 +175,11 @@ public class FacebookAdapter extends ActivityObserver
         return accessToken.getUserId();
     }
 
+    public String getAppID()
+    {        
+        return FacebookSdk.getApplicationId();
+    }
+
     public String getAccessToken()
     {
         if (accessToken == null)
