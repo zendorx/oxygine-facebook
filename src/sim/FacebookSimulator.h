@@ -13,3 +13,4 @@ bool facebookSimulatorAppInviteDialog(const string& appLinkUrl, const string& pr
 
 std::string facebookSimulatorGetAccessToken();
 std::string facebookSimulatorGetUserID();
+std::string facebookSimulatorGetAppID();

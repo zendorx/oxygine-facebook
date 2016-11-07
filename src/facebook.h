@@ -71,6 +71,7 @@ namespace facebook
 
     string getAccessToken();
     string getUserID();
+    string getAppID();
 
     namespace internal
     {

@@ -196,13 +196,41 @@ string jniFacebookGetUserID()
         JNI_NOT_NULL(jgetUserID);
 
         jobject obj = env->CallObjectMethod(_jFacebookObject, jgetUserID);
-        string data = jniGetString(env, (jstring) obj);
+        string data = jniGetString(env, (jstring)obj);
         return data;
 
     }
     catch (const notFound&)
     {
         log::error("jniFacebookGetUserID failed, class/member not found");
+    }
+
+    return "";
+}
+
+
+
+string jniFacebookGetAppID()
+{
+    if (!isFacebookEnabled())
+        return "";
+
+    try
+    {
+        JNIEnv* env = jniGetEnv();
+        LOCAL_REF_HOLDER(env);
+
+        jmethodID jm = env->GetMethodID(_jFacebookClass, "getAppID", "()Ljava/lang/String;");
+        JNI_NOT_NULL(jm);
+
+        jobject obj = env->CallObjectMethod(_jFacebookObject, jm);
+        string data = jniGetString(env, (jstring)obj);
+        return data;
+
+    }
+    catch (const notFound&)
+    {
+        log::error("jniFacebookGetAppID failed, class/member not found");
     }
 
     return "";

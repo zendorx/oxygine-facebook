@@ -181,6 +181,24 @@ namespace facebook
         return "";
     }
 
+    string getAppID()
+    {
+
+#if !FB_EXT_ENABLED
+        return "";
+#endif
+
+#ifdef __ANDROID__
+        return jniFacebookGetAppID();
+#elif TARGET_OS_IPHONE
+        return iosFacebookGetUserID();
+#else
+        return facebookSimulatorGetAppID();
+#endif
+        return "";
+
+    }
+
     namespace internal
     {
 

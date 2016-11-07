@@ -12,7 +12,7 @@
 bool _isLoggedIn = true;
 string _facebookToken = "CAACk349LXq8BANvZBq51HngUpBcL8OSkHvDxZAlqZCZAJZB7IfaL86kgRWDGZBU2owFX5Q5W7BaF1Uk2R9OdC3xrNVLwNGlnEMpSo9bAKhZCwiIyrriT3V4pNwCvjndbjhq13jhnPm8Ry22dHxZAp165cUSZA3wXoeHG9aZAnxSkGszIiORCvrMkOoApujzmtU6QqNZC6ZAxPGHTcAZDZD";
 string _userID = "10209410932054945";
-
+string _appID = "123";
 
 DECLARE_SMART(Btn, spBtn);
 class Btn : public Box9Sprite
@@ -221,4 +221,9 @@ std::string facebookSimulatorGetAccessToken()
 std::string facebookSimulatorGetUserID()
 {
     return _userID;
+}
+
+std::string facebookSimulatorGetAppID()
+{
+    return _appID;
 }

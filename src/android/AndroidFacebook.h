@@ -15,3 +15,4 @@ bool jniFacebookAppInviteDialog(const string& appLinkUrl, const string& previewI
 
 string jniFacebookGetAccessToken();
 string jniFacebookGetUserID();
+string jniFacebookGetAppID();
