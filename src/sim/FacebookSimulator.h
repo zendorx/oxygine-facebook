@@ -6,6 +6,7 @@ using namespace std;
 
 void facebookSimulatorInit();
 void facebookSimulatorLogin();
+void facebookSimulatorLogout();
 void facebookSimulatorGetFriends();
 bool facebookSimulatorIsLoggedIn();
 void facebookSimulatorNewMeRequest();

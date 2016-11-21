@@ -80,6 +80,23 @@ namespace facebook
         log::messageln("facebook::login done");
     }
 
+    void logout()
+    {
+#if !FB_EXT_ENABLED
+        return;
+#endif
+        log::messageln("facebook::logout");
+
+#ifdef __ANDROID__
+        jniFacebookLogout();
+#elif __APPLE__
+        iosFacebookLogout();
+#else
+        facebookSimulatorLogout();
+#endif
+        log::messageln("facebook::logout done");
+    }
+
     bool appInviteDialog(const string& appLinkUrl, const string& previewImageUrl)
     {
 #if !FB_EXT_ENABLED

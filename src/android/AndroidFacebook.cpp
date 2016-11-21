@@ -258,7 +258,9 @@ bool jniFacebookAppInviteDialog(const string& appLinkUrl, const string& previewI
     catch (const notFound&)
     {
         log::error("jniFacebookGetFriends failed, class/member not found");
+        return false;
     }
+    return true;
 }
 
 void jniFacebookGetFriends()
@@ -282,6 +284,7 @@ void jniFacebookGetFriends()
     }
 
 }
+
 void jniFacebookLogin()
 {
     if (!isFacebookEnabled())
@@ -300,5 +303,26 @@ void jniFacebookLogin()
     catch (const notFound&)
     {
         log::error("jniFacebookLogin failed, class/member not found");
+    }
+}
+
+void jniFacebookLogout()
+{
+    if (!isFacebookEnabled())
+        return;
+
+    try
+    {
+        JNIEnv* env = jniGetEnv();
+        LOCAL_REF_HOLDER(env);
+
+        jmethodID jlogout = env->GetMethodID(_jFacebookClass, "logout", "()V");
+        JNI_NOT_NULL(jlogout);
+        env->CallVoidMethod(_jFacebookObject, jlogout);
+
+    }
+    catch (const notFound&)
+    {
+        log::error("jniFacebookLogout failed, class/member not found");
     }
 }

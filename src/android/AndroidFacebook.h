@@ -10,6 +10,7 @@ void jniFacebookFree();
 bool jniFacebookIsLoggedIn();
 void jniFacebookGetFriends();
 void jniFacebookLogin();
+void jniFacebookLogout();
 void jniFacebookNewMeRequest();
 bool jniFacebookAppInviteDialog(const string& appLinkUrl, const string& previewImageUrl);
 

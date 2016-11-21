@@ -65,6 +65,7 @@ namespace facebook
 
     bool isLoggedIn();
     void login();
+    void logout();
     void getFriends();
     void newMeRequest();
     bool appInviteDialog(const string& appLinkUrl, const string& previewImageUrl);

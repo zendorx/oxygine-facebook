@@ -29,6 +29,11 @@ void iosFacebookLogin()
      }];
 }
 
+void iosFacebookLogout()
+{
+    
+}
+
 std::string iosFacebookGetAccessToken()
 {
     if ([FBSDKAccessToken currentAccessToken])

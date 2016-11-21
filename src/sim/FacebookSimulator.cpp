@@ -10,9 +10,21 @@
 #include "core/oxygine.h"
 
 bool _isLoggedIn = true;
-string _facebookToken = "YOUR_FACEBOOK_TOKEN";
-string _userID = "YOUR_FACEBOOK_ID";
-string _appID = "YOU_FACEBOOK_APP_ID";
+string _facebookToken = "";
+string _userID = "";
+string _appID = "";
+
+Json::Value _facebook(Json::objectValue);
+
+std::string getValue(const Json::Value &obj, const char *key);
+static void save()
+{
+    _facebook["loggedIn"] = _isLoggedIn;
+    
+    Json::StyledWriter writer;
+    string s = writer.write(_facebook);
+    file::write(".facebook", s.c_str(), s.size());
+}
 
 DECLARE_SMART(Btn, spBtn);
 class Btn : public Box9Sprite
@@ -125,7 +137,6 @@ public:
 };
 
 
-Json::Value _facebook(Json::objectValue);
 
 void facebookSimulatorLogin()
 {
@@ -139,7 +150,11 @@ void facebookSimulatorLogin()
 
         dialog->detach();
         e->removeListener();
+
         _isLoggedIn = true;
+        _facebookToken = getValue(_facebook, "token");
+        _userID = getValue(_facebook, "userID");
+        save();
 
         facebook::internal::loginResult(true);
     });
@@ -148,26 +163,51 @@ void facebookSimulatorLogin()
     {
         dialog->detach();
         e->removeListener();
+
+        facebook::internal::loginResult(false);
     });
+}
 
+void facebookSimulatorLogout()
+{
+    _facebookToken.clear();
+    _userID.clear();
+    _isLoggedIn = false;
+    save();
+}
 
-    //_is_logged_in = true;
-    //facebook::internal::loginResult(true);
-    //facebook::internal::newToken(_facebookToken);
+std::string getValue(const Json::Value &obj, const char *key)
+{
+    if (obj[key].empty())
+        return "";
+    return obj[key].asString();
 }
 
 void facebookSimulatorInit()
 {
     log::messageln("Facebook Simulator Init");
 
+    _isLoggedIn = false;
+    _facebookToken = "";
+    _userID = "";
+    _appID = "";
 
     file::buffer bf;
-    file::read(".facebook", bf, ep_ignore_error);
 
-    if (!bf.empty())
+    if (file::read(".facebook", bf, ep_ignore_error))
     {
         Json::Reader reader;
         reader.parse((char*)&bf.front(), (char*)&bf.front() + bf.size(), _facebook, false);
+
+
+        _appID = getValue(_facebook, "appID");
+
+        if (_facebook["loggedIn"].asBool())
+        {
+            _isLoggedIn = true;
+            _facebookToken = getValue(_facebook, "token");
+            _userID = getValue(_facebook, "userID");
+        }
     }
 
 #ifdef EMSCRIPTEN

@@ -11,6 +11,8 @@
 #include <string>
 
 void iosFacebookLogin();
+void iosFacebookLogout();
+
 std::string iosFacebookGetAccessToken();
 std::string iosFacebookGetUserID();
 std::string iosFacebookGetAppID();
