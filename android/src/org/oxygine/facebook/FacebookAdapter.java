@@ -97,7 +97,8 @@ public class FacebookAdapter extends ActivityObserver
                 // Set the access token using
                 // currentAccessToken when it's loaded or set.
                 accessToken = currentAccessToken;
-                newToken(accessToken.getToken());
+                if (accessToken != null)
+                	newToken(accessToken.getToken());
             }
         };
         // If the access token is available already assign it.
