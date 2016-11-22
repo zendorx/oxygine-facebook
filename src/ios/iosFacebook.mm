@@ -31,7 +31,8 @@ void iosFacebookLogin()
 
 void iosFacebookLogout()
 {
-    
+    FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
+    [loginManager logOut];
 }
 
 std::string iosFacebookGetAccessToken()
