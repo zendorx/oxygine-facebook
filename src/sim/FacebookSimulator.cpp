@@ -16,11 +16,11 @@ string _appID = "";
 
 Json::Value _facebook(Json::objectValue);
 
-std::string getValue(const Json::Value &obj, const char *key);
+std::string getValue(const Json::Value& obj, const char* key);
 static void save()
 {
     _facebook["loggedIn"] = _isLoggedIn;
-    
+
     Json::StyledWriter writer;
     string s = writer.write(_facebook);
     file::write(".facebook", s.c_str(), s.size());
@@ -176,7 +176,7 @@ void facebookSimulatorLogout()
     save();
 }
 
-std::string getValue(const Json::Value &obj, const char *key)
+std::string getValue(const Json::Value& obj, const char* key)
 {
     if (obj[key].empty())
         return "";
