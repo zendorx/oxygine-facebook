@@ -18,13 +18,14 @@ void iosFacebookLogin()
      logInWithReadPermissions: @[@"public_profile"]
      fromViewController:0
      handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-         facebook::internal::loginResult(error == 0);
+         
          if (error) {
-             NSLog(@"Process error");
+             facebook::internal::loginResult(false);
          } else if (result.isCancelled) {
-             NSLog(@"Cancelled");
+             facebook::internal::loginResult(false);
          } else {
              NSLog(@"Logged in");
+             facebook::internal::loginResult(true);
          }
      }];
 }
