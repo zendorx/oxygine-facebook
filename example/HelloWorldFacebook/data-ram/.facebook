@@ -1,0 +1,6 @@
+{
+   "appID" : "YOUR_FB_ADD_ID",
+   "loggedIn" : false,
+   "token" : "USER_TOKEN",
+   "userID" : "YOUR_USER_ID"
+}
