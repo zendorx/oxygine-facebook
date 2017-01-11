@@ -224,7 +224,8 @@ namespace facebook
             log::messageln("facebook::internal::newToken %s", value.c_str());
             TokenEvent ev;
             ev.token = value;
-            _dispatcher->dispatchEvent(&ev);
+            if (_dispatcher)
+                _dispatcher->dispatchEvent(&ev);
         }
 
         void loginResult(bool value)
@@ -232,7 +233,8 @@ namespace facebook
             log::messageln("facebook::internal::loginResult %d", value);
             LoginEvent ev;
             ev.isLoggedIn = value;
-            _dispatcher->dispatchEvent(&ev);
+            if (_dispatcher)
+                _dispatcher->dispatchEvent(&ev);
         }
 
 
@@ -263,15 +265,14 @@ namespace facebook
                 event.link = root["link"].asCString();
                 event.name = root["name"].asCString();
             }
-
-            _dispatcher->dispatchEvent(&event);
+            
+            if (_dispatcher)
+                _dispatcher->dispatchEvent(&event);
         }
 
         void newMyFriendsRequestResult(const string& data, bool error)
         {
             log::messageln("facebook::internal::newMyFriendsRequestResult %s", data.c_str());
-
-
         }
     }
 }
