@@ -26,8 +26,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.oxygine.lib.extension.ActivityObserver;
-
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
+import java.security.MessageDigest;
 import java.util.Arrays;
+import android.util.Base64;
 
 public class FacebookAdapter extends ActivityObserver
 {
@@ -56,6 +60,24 @@ public class FacebookAdapter extends ActivityObserver
     {
         Log.i(TAG, "login");
         LoginManager.getInstance().logInWithReadPermissions(activity, Arrays.asList("public_profile", "user_friends"));
+    }
+
+    @Override
+    public void onCreate()
+    {
+    	/*
+    	try {
+    	    PackageInfo info = activity.getPackageManager().getPackageInfo(
+    	       activity.getPackageName(), PackageManager.GET_SIGNATURES);
+
+	        for (Signature signature : info.signatures) {
+	            MessageDigest md = MessageDigest.getInstance("SHA");
+	            md.update(signature.toByteArray());
+	            Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+	        }
+	    } catch (Exception e) {	        
+	    }
+	    */
     }
 
     public FacebookAdapter(Activity a)
