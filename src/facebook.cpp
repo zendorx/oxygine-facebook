@@ -265,7 +265,7 @@ namespace facebook
                 event.link = root["link"].asCString();
                 event.name = root["name"].asCString();
             }
-            
+
             if (_dispatcher)
                 _dispatcher->dispatchEvent(&event);
         }
