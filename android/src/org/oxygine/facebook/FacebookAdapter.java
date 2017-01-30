@@ -65,6 +65,9 @@ public class FacebookAdapter extends ActivityObserver
     @Override
     public void onCreate()
     {
+    	if (isLoggedIn())
+            newToken(accessToken.getToken());
+
     	/*
     	try {
     	    PackageInfo info = activity.getPackageManager().getPackageInfo(
@@ -126,8 +129,6 @@ public class FacebookAdapter extends ActivityObserver
         // If the access token is available already assign it.
         accessToken = AccessToken.getCurrentAccessToken();
 
-        if (isLoggedIn())
-            newToken(accessToken.getToken());
 /*
         profileTracker = new ProfileTracker() {
             @Override
