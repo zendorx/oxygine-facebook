@@ -3,3 +3,6 @@ example/HelloWorldFacebook/proj.ios/HelloWorldFacebook_ios.xcodeproj/xcuserdata
 example/HelloWorldFacebook/proj.ios/HelloWorldFacebook_ios.xcodeproj/project.xcworkspace/xcuserdata
 android/build/
 android/oxygine-facebook.iml
+example/HelloWorldFacebook/proj.win32/Debug_v140/
+example/HelloWorldFacebook/proj.win32/.vs/
+*.db
