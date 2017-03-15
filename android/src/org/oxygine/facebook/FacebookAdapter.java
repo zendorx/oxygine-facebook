@@ -97,6 +97,7 @@ public class FacebookAdapter extends ActivityObserver
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         Log.i(TAG, "Login::onSuccess");
+                        accessToken = loginResult.getAccessToken();
                         loginResult(true);
                     }
 
