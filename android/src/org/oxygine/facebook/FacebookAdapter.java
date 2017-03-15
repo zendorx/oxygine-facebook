@@ -65,8 +65,8 @@ public class FacebookAdapter extends ActivityObserver
     @Override
     public void onCreate()
     {
-    	if (isLoggedIn())
-            newToken(accessToken.getToken());
+    	//if (isLoggedIn())
+        //    newToken(accessToken.getToken());
 
     	/*
     	try {
