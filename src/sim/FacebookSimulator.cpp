@@ -140,31 +140,33 @@ public:
 
 void facebookSimulatorLogin()
 {
-    spFacebookDialog dialog = new FacebookDialog;
-    dialog->setScale(1.0f / getStage()->getScaleX());
-    dialog->setSize(500, 300);
-    getStage()->addChild(dialog);
+    getStage()->addTween(TweenDummy(), 1000)->addDoneCallback([](Event*) {
+        spFacebookDialog dialog = new FacebookDialog;
+        dialog->setScale(1.0f / getStage()->getScaleX());
+        dialog->setSize(500, 300);
+        getStage()->addChild(dialog);
 
-    dialog->_btnOk->addClickListener([ = ](Event * e)
-    {
+        dialog->_btnOk->addClickListener([=](Event * e)
+        {
 
-        dialog->detach();
-        e->removeListener();
+            dialog->detach();
+            e->removeListener();
 
-        _isLoggedIn = true;
-        _facebookToken = getValue(_facebook, "token");
-        _userID = getValue(_facebook, "userID");
-        save();
+            _isLoggedIn = true;
+            _facebookToken = getValue(_facebook, "token");
+            _userID = getValue(_facebook, "userID");
+            save();
 
-        facebook::internal::loginResult(true);
-    });
+            facebook::internal::loginResult(true);
+        });
 
-    dialog->_btnCancel->addClickListener([ = ](Event * e)
-    {
-        dialog->detach();
-        e->removeListener();
+        dialog->_btnCancel->addClickListener([=](Event * e)
+        {
+            dialog->detach();
+            e->removeListener();
 
-        facebook::internal::loginResult(false);
+            facebook::internal::loginResult(false);
+        });
     });
 }
 

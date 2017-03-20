@@ -169,15 +169,17 @@ namespace facebook
         return "";
 #endif
         log::messageln("facebook::getAccessToken");
+        string token = "";
 
 #ifdef __ANDROID__
-        return jniFacebookGetAccessToken();
+        token = jniFacebookGetAccessToken();
 #elif TARGET_OS_IPHONE
-        return iosFacebookGetAccessToken();
+        token = iosFacebookGetAccessToken();
 #else
-        return facebookSimulatorGetAccessToken();
+        token = facebookSimulatorGetAccessToken();
 #endif
-        return "";
+        log::messageln("%s", token.c_str());
+        return token;
     }
 
     string getUserID()
@@ -187,15 +189,18 @@ namespace facebook
         return "";
 #endif
         log::messageln("facebook::getUserID");
+        string id = "";
 
 #ifdef __ANDROID__
-        return jniFacebookGetUserID();
+        id = jniFacebookGetUserID();
 #elif TARGET_OS_IPHONE
-        return iosFacebookGetUserID();
+        id = iosFacebookGetUserID();
 #else
-        return facebookSimulatorGetUserID();
+        id = facebookSimulatorGetUserID();
 #endif
-        return "";
+        log::messageln("%s", id.c_str());
+
+        return id;
     }
 
     string getAppID()
