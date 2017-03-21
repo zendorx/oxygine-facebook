@@ -11,12 +11,33 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #include "facebook.h"
 
+UIViewController * getViewcontrollerForFB(void)
+{
+    @try {
+        UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+        if ( window == nullptr )
+            return nullptr;
+    
+        UIView* view = [window.subviews objectAtIndex:0];
+        if(!view)
+            return nullptr;
+        id nextResponder = [view nextResponder];
+        if(!nextResponder)
+            return nullptr;
+        if( [nextResponder isKindOfClass:[UIViewController class]] )
+            return (UIViewController *)nextResponder;
+    }
+    @catch(NSException *e) {
+    }
+    return nullptr;
+}
+
 void iosFacebookLogin()
 {
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
     [login
      logInWithReadPermissions: @[@"public_profile"]
-     fromViewController:0
+     fromViewController: getViewcontrollerForFB()
      handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
          
          if (error) {
