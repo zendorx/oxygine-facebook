@@ -180,10 +180,15 @@ public class FacebookAdapter extends ActivityObserver
                 new GraphRequest.GraphJSONObjectCallback() {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
-                        Log.i(TAG, "newMeRequest:onCompleted " + object.toString());
-                        userData = object;
-                        newMeRequestResult(object.toString(), response.getError() != null);
-
+                    	try
+                    	{
+	                        userData = object;
+	                        newMeRequestResult(object.toString(), response.getError() != null);
+                    	}
+                    	catch (Exception e) 
+                    	{	      
+                    		newMeRequestResult("", true);  
+	    				}
                     }
                 });
         Bundle parameters = new Bundle();
