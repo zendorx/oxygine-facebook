@@ -36,9 +36,7 @@ void iosFacebookLogin()
 {
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
     [login
-     logInWithReadPermissions: @[@"public_profile"]
-     fromViewController: getViewcontrollerForFB()
-     handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+     logInWithReadPermissions: @[@"public_profile"]     handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
          
          if (error) {
              facebook::internal::loginResult(false);
