@@ -61,7 +61,7 @@ namespace facebook
         fIsLoggedIn = []() {OX_ASSERT(0); return false; };
         fGetUserID = iosFacebookGetUserID;
         fGetAccessToken = iosFacebookGetAccessToken;
-        fGetAppID = []() {OX_ASSERT(0); return ""; };
+        fGetAppID = []() {OX_ASSERT(0); return std::string(""); };
 #else
         fInit = facebookSimulatorInit;
 
