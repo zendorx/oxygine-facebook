@@ -76,6 +76,29 @@ namespace facebook
 
     namespace internal
     {
+        typedef void(*cbInit)();
+        typedef void(*cbFree)();
+        typedef void(*cbLogin)();
+        typedef void(*cbLogout)();
+        typedef void(*cbNewMeRequest)();
+        typedef void(*cbGetFriends)();
+
+        typedef bool(*cbIsLoggedIn)();
+        typedef std::string(*cbGetUserID)();
+        typedef std::string(*cbGetAccessToken)();
+        typedef std::string(*cbGetAppID)();
+
+        extern cbInit          fInit;
+        extern cbFree          fFree;
+        extern cbLogin         fLogin;
+        extern cbLogout        fLogout;
+        extern cbNewMeRequest     fNewMeRequest;
+        extern cbGetFriends         fGetFriends;
+        extern cbIsLoggedIn         fIsLoggedIn;
+        extern cbGetUserID           fGetUserID;
+        extern cbGetAccessToken fGetAccessToken;
+        extern cbGetAppID             fGetAppID;
+
         void newMeRequestResult(const string& data, bool error);
         void loginResult(bool value);
         void newToken(const string& value);
