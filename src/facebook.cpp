@@ -56,7 +56,7 @@ namespace facebook
 #elif TARGET_OS_IPHONE
         fLogin = iosFacebookLogin;
         fLogout = iosFacebookLogout;
-        fNewMeRequest = []() {OX_ASSERT(0); };
+        fNewMeRequest = iosFacebookRequestMe;
         fGetFriends = []() {OX_ASSERT(0); };
         fIsLoggedIn = []() {OX_ASSERT(0); return false; };
         fGetUserID = iosFacebookGetUserID;
@@ -209,7 +209,7 @@ namespace facebook
             else
             {
                 event.id = root["id"].asCString();
-                event.link = root["link"].asCString();
+                //event.link = root["link"].asCString();
                 event.name = root["name"].asCString();
             }
 

@@ -22,7 +22,7 @@ namespace facebook
         NewMeRequestEvent() : Event(EVENT) {}
 
         string id;
-        string link;
+        //string link;
         string name;
         bool error = false;
     };
