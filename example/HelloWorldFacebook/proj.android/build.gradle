@@ -48,6 +48,16 @@ android {
         targetSdkVersion 23
     }
 
+    buildTypes {
+        debug {
+            resValue "string", "fb_app_id", "136567916522144"
+        }
+        
+        release {
+            resValue "string", "fb_app_id", "136567916522144"
+        }
+    }
+
 
     sourceSets {
         main {

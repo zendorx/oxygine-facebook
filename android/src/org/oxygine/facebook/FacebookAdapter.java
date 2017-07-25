@@ -62,25 +62,25 @@ public class FacebookAdapter extends ActivityObserver
         LoginManager.getInstance().logInWithReadPermissions(activity, Arrays.asList("public_profile", "user_friends"));
     }
 
+    public void printKeyHash()
+    {
+        try {
+            PackageInfo info = activity.getPackageManager().getPackageInfo(
+               activity.getPackageName(), PackageManager.GET_SIGNATURES);
+
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (Exception e) {         
+        }
+    }
+
     @Override
     public void onCreate()
     {
-    	//if (isLoggedIn())
-        //    newToken(accessToken.getToken());
-
-    	/*
-    	try {
-    	    PackageInfo info = activity.getPackageManager().getPackageInfo(
-    	       activity.getPackageName(), PackageManager.GET_SIGNATURES);
-
-	        for (Signature signature : info.signatures) {
-	            MessageDigest md = MessageDigest.getInstance("SHA");
-	            md.update(signature.toByteArray());
-	            Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-	        }
-	    } catch (Exception e) {	        
-	    }
-	    */
+        printKeyHash();
     }
 
     public FacebookAdapter(Activity a)
